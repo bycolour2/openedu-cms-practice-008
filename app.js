@@ -16,27 +16,20 @@ export default (express, puppeteer) => {
 
     app.get('/test/', async (req, res) => {
         const { URL } = req.query
-
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
         await page.goto(URL)
-
+        await page.click('#bt')
         const value = await page.evaluate(async () => {
-            const button = document.getElementById('bt')
             const input = document.getElementById('inp')
-
-            button.click()
-
             return input.value
         })
-
         res.send(value)
     })
 
     app.all('*', (req, res) => {
         res.send(author)
     })
-
 
     return app;
 }
