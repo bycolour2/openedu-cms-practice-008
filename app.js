@@ -17,6 +17,7 @@ export default (express, puppeteer) => {
     app.get('/test/', async (req, res) => {
         const { URL } = req.query
         const browser = await puppeteer.launch({
+            headless: true,
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
